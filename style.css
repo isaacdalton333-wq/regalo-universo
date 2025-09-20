@@ -1,0 +1,65 @@
+body {
+    margin: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background-image: url('tu-foto.jpg'); 
+    background-size: cover;
+    overflow: hidden;
+    background-position: center 43%; 
+}
+
+/* PASO 1: Le quitamos la animación a este contenedor */
+.sun-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* La línea 'animation' ha sido eliminada de aquí */
+}
+
+.sun {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    background: radial-gradient(circle, #ffeb3b, #ff9800);
+    box-shadow: 0 0 40px 15px rgba(255, 165, 0, 0.7), 
+                0 0 70px 30px rgba(255, 200, 0, 0.5);
+    position: absolute;
+}
+
+.orbit-word {
+    color: white;
+    font-size: 24px;
+    font-family: 'Georgia', serif;
+    text-shadow: 0 0 5px black;
+    position: absolute; 
+    
+    /* La posición inicial no cambia */
+    transform: rotate(var(--angle)) translateX(220px) rotate(calc(-1 * var(--angle)));
+
+    /* PASO 2: Le devolvemos la animación a las palabras con el nombre 'orbit' */
+    animation: orbit 25s linear infinite;
+}
+
+/* PASO 3: Reemplazamos la animación anterior con esta nueva versión */
+@keyframes orbit {
+    from {
+        /* La posición inicial es la que ya conocemos */
+        transform: rotate(var(--angle)) translateX(220px) rotate(calc(-1 * var(--angle)));
+    }
+    to {
+        /* Al final de la animación, ha girado 360 grados Y el texto también ha contra-girado 360 grados para mantenerse derecho */
+        transform: rotate(calc(var(--angle) + 360deg)) translateX(220px) rotate(calc(-1 * var(--angle) - 360deg));
+    }
+}
+/* --- Estilos para el Reproductor de Audio --- */
+.reproductor {
+    position: absolute; /* Permite posicionarlo libremente en la pantalla */
+    top: 20px;       /* Lo separa 20px del borde inferior */
+    left: 20px;         /* Lo separa 20px del borde izquierdo */
+    filter: invert(1) opacity(0.7); /* Invierte el color y lo hace un poco transparente */
+}
